@@ -1,0 +1,32 @@
+{% extends "vault_app/base_diary.html" %}
+
+{% block content %}
+<h2>What's on your mind today?</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <textarea name="content" rows="5" placeholder="Write something..."></textarea><br>
+    <button type="submit">Save Entry</button>
+</form>
+
+<hr>
+
+<h3>Previous Entries:</h3>
+{% for entry in entries %}
+    <div style="margin-bottom: 15px; border: 1px solid #ccc; padding: 10px; border-radius: 5px;">
+        <p><strong>{{ entry.created_at|date:"M d, Y H:i" }}</strong></p>
+        <p>{{ entry.content }}</p>
+
+        <form method="post" action="{% url 'delete_entry' entry.id %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" style="color:red;">Delete</button>
+        </form>
+
+        <form method="get" action="{% url 'analyze_entry' entry.id %}" style="display:inline;">
+            <button type="submit">Analyze</button>
+        </form>
+    </div>
+{% empty %}
+    <p>No entries yet.</p>
+{% endfor %}
+{% endblock %}

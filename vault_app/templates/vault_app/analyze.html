@@ -1,0 +1,22 @@
+{% extends "base_diary.html" %}
+{% block content %}
+<h2>🧠 Analysis</h2>
+
+<p><strong>Date:</strong> {{ date }}</p>
+<p><strong>Content:</strong> {{ entry.content }}</p>
+<p><strong>Mood:</strong> {{ mood }}</p>
+
+<h3>💡 Suggestions:</h3>
+<ul>
+    {% for suggestion in suggestions %}
+        <li>{{ suggestion }}</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'dashboard' %}">
+    <button style="padding: 8px 16px; background-color: #4CAF50; color: white; border: none; border-radius: 5px;">
+        ← Back to Dashboard
+    </button>
+</a>
+
+{% endblock %}

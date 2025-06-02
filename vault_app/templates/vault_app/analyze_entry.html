@@ -1,0 +1,23 @@
+<!-- vault_app/templates/vault_app/analyze_entry.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Analysis</title>
+</head>
+<body>
+    <h1>Analysis</h1>
+    <p><strong>Date:</strong> {{ entry.created_at|date:"M d, Y H:i" }}</p>
+    <p><strong>Content:</strong> {{ entry.content }}</p>
+    <hr>
+    <h3>Suggested Insight:</h3>
+    <p>{{ suggestion }}</p>
+    <br>
+    <a href="{% url 'dashboard' %}">
+        <button style="padding: 8px 16px; background-color: #4CAF50; color: white; border: none; border-radius: 5px;">
+            ← Back to Dashboard
+        </button>
+    </a>
+</body>
+</html>
