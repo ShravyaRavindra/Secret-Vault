@@ -1,0 +1,27 @@
+{% extends "vault_app/base.html" %}
+
+{% block content %}
+<a href="{% url 'dashboard' %}" class="btn btn-secondary">← Back to Dashboard</a>
+
+ <hr>
+  <h2>Your To-Do List</h2>
+  <ul>
+    {% for item in items %}
+      <li>
+        {{ item.title }}
+        <small style="color: gray;">
+          ({{ item.created_at|date:"M d, Y - H:i" }})
+        </small>
+        - <a href="{% url 'delete_todo' item.pk %}" style="color: red;">Delete</a>
+      </li>
+    {% empty %}
+      <li>No tasks yet. Start by adding one!</li>
+    {% endfor %}
+  </ul>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Add</button>
+  </form>
+
+{% endblock %}
